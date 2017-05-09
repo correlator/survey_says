@@ -2,7 +2,7 @@ class Participant < ApplicationRecord
   validates :name, presence: true
   validates :phone, presence: true,
                     format: {
-                      with: /\d{10}/,
+                      with: /\A\d{10}\z/,
                       message: "phone must be 10 digits"
                     }
   validates :email, presence: true,
