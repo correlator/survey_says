@@ -1,0 +1,6 @@
+$tableRow = "<%= j render 'participants/table_row', participant: @participant %>";
+$("#new_participant").trigger('reset');
+
+$(".participant-form-row").slideUp();
+
+$($("#participant-table tr")[0]).after($tableRow);

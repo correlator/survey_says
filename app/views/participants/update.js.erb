@@ -1,0 +1,9 @@
+$oldTableRow = $("#<%= "participant-tablerow-#{@participant.id}" %>");
+$newTableRow = "<%= j render 'participants/table_row', participant: @participant %>";
+
+$oldTableRow.replaceWith($newTableRow);
+
+$newForm = "<%= j render '/participants/inline_form',
+                          participant: Participant.new %>";
+$(".participant-form-row").html($newForm);
+$(".participant-form-row").slideUp();

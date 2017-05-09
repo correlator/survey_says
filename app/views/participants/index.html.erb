@@ -1,0 +1,35 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<h2 class="text-center">Participants</h2>
+		</div>
+		<div class="col-md-2 col-md-offset-1">
+			<h2>
+			<button onclick='$(".participant-form-row").slideDown()' class= "btn btn-sm btn-wide btn-primary">
+				<span class="glyphicon glyphicon-plus"></span>
+				Add Participant
+			</button>
+		</h2>
+		</div>
+	</div>
+	<div class="row participant-form-row", hidden=true>
+		<%= render '/participants/inline_form', participant: Participant.new %>
+	</div>
+  </br>
+  </br>
+	<table class="table table-bordered table-striped" id="participant-table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Phone</th>
+				<th>Email</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @participants.each do |participant| %>
+				<%= render('/participants/table_row', participant: participant) %>
+			<% end %>
+		</tbody>
+	</table>
+</div>
