@@ -1,26 +1,5 @@
 # README
-[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
+[![Code Climate](https://codeclimate.com/github/correlator/survey_says/badges/gpa.svg)](https://codeclimate.com/github/correlator/survey_says)
+[![Test Coverage](https://codeclimate.com/github/correlator/survey_says/badges/coverage.svg)](https://codeclimate.com/github/correlator/survey_says/coverage)
 
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+DON'T BE THE PERSON THAT DROPS THE GPA OR TEST COVERAGE!
