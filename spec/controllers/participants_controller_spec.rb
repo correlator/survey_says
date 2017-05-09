@@ -61,13 +61,13 @@ RSpec.describe ParticipantsController, type: :request do
     let(:params) { FactoryGirl.attributes_for(:participant) }
     it 'should change participant count by 1' do
       expect do
-        post participants_path(participant1, format: :json),
+        post participants_path(format: :json),
              params: { participant: params },
              headers: { }
       end.to change { Participant.count }.by 1
     end
     it 'should be ok with valid params' do
-      post participants_path(participant1, format: :json),
+      post participants_path(format: :json),
            params: { participant: params },
            headers: { }
       expect(response).to be_ok
@@ -76,6 +76,34 @@ RSpec.describe ParticipantsController, type: :request do
       params['name'] = nil
       post participants_path(format: :json),
            params: { participant: params },
+           headers: { }
+      expect(response).to be_unprocessable
+    end
+  end
+
+  describe '#update' do
+    let(:new_name) { 'Jaimenez' }
+    it 'should change participant name' do
+      put participant_path(participant1, format: :json),
+           params: { participant: { name: new_name} },
+           headers: { }
+      expect(participant1.reload.name).to eq new_name
+    end
+    it 'should be ok with valid params' do
+      put participant_path(participant1, format: :json),
+           params: { participant: { name: new_name} },
+           headers: { }
+      expect(response).to be_ok
+    end
+    it 'should be not found with wrong id' do
+      put participant_path('0', format: :json),
+           params: { participant: { name: new_name} },
+           headers: { }
+      expect(response).to be_not_found
+    end
+    it 'should be a bad request with bad params' do
+      put participant_path(participant1, format: :json),
+           params: { participant: { name: nil } },
            headers: { }
       expect(response).to be_unprocessable
     end

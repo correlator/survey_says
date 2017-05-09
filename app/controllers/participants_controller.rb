@@ -17,6 +17,7 @@ class ParticipantsController < ApplicationController
 
   def edit
     respond_to do |format|
+      format.js
       format.html
       format.json { render json: @participant }
     end
@@ -25,12 +26,31 @@ class ParticipantsController < ApplicationController
   def create
     @participant = Participant.new(participant_params)
     respond_to do |format|
-      if @participant.save
+      if @participant.update(participant_params)
+        format.js
         format.html
         format.json { render json: @participant }
       else
+        format.js
         format.html { render :new }
-        format.json { render json: @participant.errors, status: :unprocessable_entity }
+        format.json { render json: @participant.errors,
+                             status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    @participant.update(participant_params)
+    respond_to do |format|
+      if @participant.save
+        format.js
+        format.html
+        format.json { render json: @participant }
+      else
+        format.js
+        format.html { render :new }
+        format.json { render json: @participant.errors,
+                                   status: :unprocessable_entity }
       end
     end
   end
