@@ -69,4 +69,17 @@ RSpec.describe Order, type: :model do
       expect(order.vendor).to be_a Vendor
     end
   end
+
+  context 'update_status' do
+    it 'should be called after model is saved' do
+      expect_any_instance_of(Order).to receive(:update_status)
+      order
+    end
+    it 'should complete an order past its close date' do
+      order.activate!
+      expect(order.status).to eq 'active'
+      order.update(close_date: 1.day.ago)
+      expect(order.status).to eq 'complete'
+    end
+  end
 end

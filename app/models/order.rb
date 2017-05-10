@@ -6,6 +6,12 @@ class Order < ApplicationRecord
   belongs_to :vendor
   enum status: { pending: 0, active: 1, complete: 2 }
 
+  after_save :update_status
+
+  def update_status
+    complete! if active_and_past_close_date?
+  end
+
   def activate!
     return unless status == 'pending'
     update(status: :active)
@@ -14,5 +20,11 @@ class Order < ApplicationRecord
   def complete!
     return unless status == 'active'
     update(status: :complete)
+  end
+
+  private
+
+  def active_and_past_close_date?
+    status == 'active' && Date.today >= close_date
   end
 end
