@@ -26,7 +26,7 @@ class VendorsController < ApplicationController
   def create
     @vendor = Vendor.new(vendor_params)
     respond_to do |format|
-      if @vendor.update(vendor_params)
+      if @vendor.save
         format.js
         format.html
         format.json { render json: @vendor }

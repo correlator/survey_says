@@ -4,6 +4,6 @@ FactoryGirl.define do
     description { FFaker::DizzleIpsum.sentence }
     price_in_cents { 100}
     close_date { Date.new }
-    status { 0 }
+    status { :pending }
   end
 end

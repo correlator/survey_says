@@ -26,7 +26,7 @@ class ParticipantsController < ApplicationController
   def create
     @participant = Participant.new(participant_params)
     respond_to do |format|
-      if @participant.update(participant_params)
+      if @participant.save
         format.js
         format.html
         format.json { render json: @participant }
