@@ -1,0 +1,9 @@
+<tr id="<%= "vendor-tablerow-#{vendor.id}" %>" data-updateurl="<%= vendor_path(vendor, format: :js) %>">
+  <td><%= vendor.name %></td>
+	<td>
+    <%= link_to 'Show', vendor_url(vendor),
+                        class: 'btn btn-xs btn-success' %> &nbsp
+    <%= link_to 'Edit', edit_vendor_url(vendor, format: :js),
+                        remote: true, class: 'btn btn-xs btn-info' %>
+  </td>
+</tr>

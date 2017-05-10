@@ -1,0 +1,10 @@
+<%= form_for vendor, remote: true do |f| %>
+  <div class="col-md-4 col-md-offset-2">
+    <%= f.label :name, class: 'control-label' %>
+    <%= f.text_field(:name,  required: true, class: 'form-control') %>
+  </div>
+  <div class="col-md-4">
+    </br>
+    <%= f.submit 'Save', class: "btn btn-primary btn-wide btn-inline-form btn-sm" %>
+  </div>
+<% end %>

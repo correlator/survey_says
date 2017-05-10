@@ -1,0 +1,8 @@
+$oldTableRow = $("#<%= "vendor-tablerow-#{@vendor.id}" %>");
+$newTableRow = "<%= j render 'vendors/table_row', vendor: @vendor %>";
+
+$oldTableRow.replaceWith($newTableRow);
+
+$newForm = "<%= j render '/vendors/inline_form', vendor: Vendor.new %>";
+$(".vendor-form-row").html($newForm);
+$(".vendor-form-row").slideUp();

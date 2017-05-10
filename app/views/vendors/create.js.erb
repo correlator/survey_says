@@ -1,0 +1,6 @@
+$tableRow = "<%= j render 'vendors/table_row', vendor: @vendor %>";
+$("#new_vendor").trigger('reset');
+
+$(".vendor-form-row").slideUp();
+
+$($("#vendor-table tr")[0]).after($tableRow);
