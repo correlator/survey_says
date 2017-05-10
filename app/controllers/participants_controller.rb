@@ -33,7 +33,7 @@ class ParticipantsController < ApplicationController
       else
         format.js
         format.html { render :new }
-        format.json { render json_400 }
+        format.json { render json_400(@participant) }
       end
     end
   end
@@ -48,7 +48,7 @@ class ParticipantsController < ApplicationController
       else
         format.js
         format.html { render :new }
-        format.json { render json_400 }
+        format.json { render json_400(@participant) }
       end
     end
   end
@@ -62,12 +62,5 @@ class ParticipantsController < ApplicationController
   def load_participant
     @participant = Participant.find_by_id(params[:id])
     render_404 if @participant.blank?
-  end
-
-  def json_400
-    {
-      json: @participant.errors,
-      status: :unprocessable_entity
-    }
   end
 end

@@ -33,7 +33,7 @@ class VendorsController < ApplicationController
       else
         format.js
         format.html { render :new }
-        format.json { render json_400 }
+        format.json { render json_400(@vendor) }
       end
     end
   end
@@ -48,7 +48,7 @@ class VendorsController < ApplicationController
       else
         format.js
         format.html { render :new }
-        format.json { render json_400 }
+        format.json { render json_400(@vendor) }
       end
     end
   end
@@ -62,12 +62,5 @@ class VendorsController < ApplicationController
   def load_vendor
     @vendor = Vendor.find_by_id(params[:id])
     render_404 if @vendor.blank?
-  end
-
-  def json_400
-    {
-      json: @vendor.errors,
-      status: :unprocessable_entity
-    }
   end
 end

@@ -4,4 +4,11 @@ class ApplicationController < ActionController::Base
   def render_404
     head :not_found
   end
+
+  def json_400(object)
+    {
+      json: object.errors,
+      status: :unprocessable_entity
+    }
+  end
 end
