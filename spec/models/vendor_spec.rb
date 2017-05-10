@@ -10,4 +10,9 @@ RSpec.describe Vendor, type: :model do
       expect(vendor).to_not be_valid
     end
   end
+
+  it 'should have many orders' do
+    FactoryGirl.create(:order, vendor: vendor)
+    expect(vendor.orders.size).to eq 1
+  end
 end
