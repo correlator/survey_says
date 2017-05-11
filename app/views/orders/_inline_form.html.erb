@@ -1,7 +1,7 @@
 <%= form_for order, remote: true do |f| %>
   <div class="col-md-4">
     <%= f.label :vendor, class: 'control-label' %>
-    <%= f.select(:vendor,  required: true, class: 'form-control') %>
+    <%= f.select(:vendor, options_for_select(Vendor.pluck(:name, :id)) {}, { required: true }) %>
   </div>
   <div class="col-md-4">
     <%= f.label :description, class: "control-label" %>
@@ -17,10 +17,17 @@
   </div>
   <div class="col-md-4">
     <%= f.label :participants, class: 'control-label' %>
-    <%= f.select(:participants,  required: true, class: 'form-control') %>
+    <%= f.select(:participants,  options_for_select(Participant.pluck(:name, :id)), {}, { required: true, multiple: true }) %>
   </div>
   <div class="col-md-4">
     </br>
     <%= f.submit 'Save', class: "btn btn-primary btn-wide btn-inline-form btn-sm" %>
   </div>
 <% end %>
+
+<script>
+  $( "#order_participants" ).select2({
+  });
+  $( "#order_vendor" ).select2({
+  });
+</script>
