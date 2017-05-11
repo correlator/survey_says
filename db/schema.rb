@@ -10,11 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170510021449) do
+ActiveRecord::Schema.define(version: 20170511010220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "order_participants", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid    "order_id"
+    t.uuid    "participant_id"
+    t.integer "status",         default: 0
+    t.index ["order_id"], name: "index_order_participants_on_order_id", using: :btree
+    t.index ["participant_id"], name: "index_order_participants_on_participant_id", using: :btree
+  end
 
   create_table "orders", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "vendor_id"
@@ -41,5 +49,7 @@ ActiveRecord::Schema.define(version: 20170510021449) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "order_participants", "orders"
+  add_foreign_key "order_participants", "participants"
   add_foreign_key "orders", "vendors"
 end

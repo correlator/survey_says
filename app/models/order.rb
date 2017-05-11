@@ -4,6 +4,8 @@ class Order < ApplicationRecord
   validates :price_in_cents, presence: true
   validates :close_date, presence: true
   belongs_to :vendor
+  has_many :order_participants
+  has_many :participants, through: :order_participants
   enum status: { pending: 0, active: 1, complete: 2 }
 
   after_save :update_status

@@ -64,13 +64,19 @@ RSpec.describe Order, type: :model do
     end
   end
 
-  context 'associations' do
+  describe 'associations' do
     it 'should belong to a vendor' do
       expect(order.vendor).to be_a Vendor
     end
+
+    it 'should have many participants' do
+      expect do
+        order.participants.create(FactoryGirl.attributes_for(:participant))
+      end.to change { order.participants.count }.by 1
+    end
   end
 
-  context 'update_status' do
+  describe '#update_status' do
     it 'should be called after model is saved' do
       expect_any_instance_of(Order).to receive(:update_status)
       order

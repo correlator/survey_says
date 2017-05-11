@@ -26,4 +26,16 @@ RSpec.describe Participant, type: :model do
       expect(participant).to_not be_valid
     end
   end
+
+  describe 'associations' do
+    let(:vendor) { FactoryGirl.create(:vendor) }
+    let(:order_params) do
+      FactoryGirl.attributes_for(:order).merge({ vendor_id: vendor.id})
+    end
+    it 'should have many orders' do
+      expect do
+        participant.orders.create(order_params)
+      end.to change { participant.orders.count }.by 1
+    end
+  end
 end
