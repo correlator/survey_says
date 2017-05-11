@@ -1,0 +1,37 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<h2 class="text-center">Orders</h2>
+		</div>
+		<div class="col-md-2 col-md-offset-1">
+			<h2>
+			<button onclick='$(".order-form-row").slideDown()' class= "btn btn-sm btn-wide btn-primary">
+				<span class="glyphicon glyphicon-plus"></span>
+				Add Order
+			</button>
+		</h2>
+		</div>
+	</div>
+	<div class="row order-form-row", hidden=true>
+		<%= render '/orders/inline_form', order: Order.new %>
+	</div>
+  </br>
+  </br>
+	<table class="table table-bordered table-striped" id="order-table">
+		<thead>
+			<tr>
+				<th>Vendor</th>
+				<th>Description</th>
+				<th>Price</th>
+				<th>Close Date</th>
+				<th>Participants</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @orders.each do |order| %>
+				<%= render('/orders/table_row', order: order) %>
+			<% end %>
+		</tbody>
+	</table>
+</div>

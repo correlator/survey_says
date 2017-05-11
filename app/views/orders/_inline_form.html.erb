@@ -1,0 +1,26 @@
+<%= form_for order, remote: true do |f| %>
+  <div class="col-md-4">
+    <%= f.label :vendor, class: 'control-label' %>
+    <%= f.select(:vendor,  required: true, class: 'form-control') %>
+  </div>
+  <div class="col-md-4">
+    <%= f.label :description, class: "control-label" %>
+    <%= f.text_field :description, class: "form-control" %>
+  </div>
+  <div class="col-md-4">
+    <%= f.label :price_in_cents, 'Price', class: "control-label" %>
+    <%= f.number_field :price_in_cents, class: "form-control" %>
+  </div>
+  <div class="col-md-4">
+    <%= f.label :close_date, class: "control-label" %>
+    <%= f.date_field :close_date, class: "form-control" %>
+  </div>
+  <div class="col-md-4">
+    <%= f.label :participants, class: 'control-label' %>
+    <%= f.select(:participants,  required: true, class: 'form-control') %>
+  </div>
+  <div class="col-md-4">
+    </br>
+    <%= f.submit 'Save', class: "btn btn-primary btn-wide btn-inline-form btn-sm" %>
+  </div>
+<% end %>

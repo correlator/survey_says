@@ -1,0 +1,13 @@
+<tr id="<%= "order-tablerow-#{order.id}" %>" data-updateurl="<%= order_path(order, format: :js) %>">
+  <td><%= order.vendor.name %></td>
+  <td><%= order.description %></td>
+  <td><%= number_to_currency(order.price.to_f * .01) %></td>
+  <td><%= order.close_date.strftime("%Y-%m-%d") %></td>
+  <td><%= "#{order.order_participants.approved.count}/#{order.order_participants.count}" %></td>
+	<td>
+    <%= link_to 'Show', order_url(order),
+                        class: 'btn btn-xs btn-success' %> &nbsp
+    <%= link_to 'Edit', edit_order_url(order, format: :js),
+                        remote: true, class: 'btn btn-xs btn-info' %>
+  </td>
+</tr>

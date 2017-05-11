@@ -1,0 +1,6 @@
+$tableRow = "<%= j render 'orders/table_row', participant: @order %>";
+$("#new_order").trigger('reset');
+
+$(".order-form-row").slideUp();
+
+$($("#order-table tr")[0]).after($tableRow);

@@ -1,0 +1,9 @@
+$oldTableRow = $("#<%= "order-tablerow-#{@order.id}" %>");
+$newTableRow = "<%= j render 'orders/table_row', order: @order %>";
+
+$oldTableRow.replaceWith($newTableRow);
+
+$newForm = "<%= j render '/orders/inline_form',
+                          order: Order.new %>";
+$(".order-form-row").html($newForm);
+$(".order-form-row").slideUp();
