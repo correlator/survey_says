@@ -28,6 +28,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         @order.participants = order_participants
+        @order.activate! #POC hack.
         format.js
         format.html
         format.json { render json: @order }
