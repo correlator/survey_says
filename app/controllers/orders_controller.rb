@@ -27,14 +27,14 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     respond_to do |format|
       if @order.save
+        @order.participants = order_participants
         format.js
         format.html
         format.json { render json: @order }
       else
         format.js
         format.html { render :new }
-        format.json { render json_400(@order) }
-      end
+        format.json { render json_400(@order) } end
     end
   end
 
@@ -42,6 +42,7 @@ class OrdersController < ApplicationController
     @order.update(order_params)
     respond_to do |format|
       if @order.save
+        @order.participants = order_participants
         format.js
         format.html
         format.json { render json: @order }
@@ -64,5 +65,9 @@ class OrdersController < ApplicationController
   def load_order
     @order = Order.find_by_id(params[:id])
     render_404 if @order.blank?
+  end
+
+  def order_participants
+    Participant.where(id: params[:order][:participant_ids])
   end
 end

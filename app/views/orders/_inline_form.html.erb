@@ -16,8 +16,8 @@
     <%= f.date_field :close_date, class: "form-control" %>
   </div>
   <div class="col-md-4">
-    <%= f.label :participants, class: 'control-label' %>
-    <%= f.select(:participants,  options_for_select(Participant.pluck(:name, :id)), {}, { required: true, multiple: true }) %>
+    <%= f.label :participant_ids, 'Participants', class: 'control-label' %>
+    <%= f.select(:participant_ids,  options_for_select(Participant.pluck(:name, :id)), {}, { required: true, multiple: true }) %>
   </div>
   <div class="col-md-4">
     </br>
@@ -26,7 +26,7 @@
 <% end %>
 
 <script>
-  $( "#order_participants" ).select2({
+  $( "#order_participant_ids" ).select2({
   });
   $( "#order_vendor_id" ).select2({
   });

@@ -3,6 +3,8 @@ RSpec.describe OrdersController, type: :request do
   let(:vendor) { FactoryGirl.create(:vendor) }
   let!(:order1) { FactoryGirl.create(:order) }
   let!(:order2) { FactoryGirl.create(:order) }
+  let!(:participant1) { FactoryGirl.create(:participant) }
+  let!(:participant2) { FactoryGirl.create(:participant) }
 
   let(:json_body) { JSON.parse(response.body) }
 
@@ -57,8 +59,14 @@ RSpec.describe OrdersController, type: :request do
   end
 
   describe '#create' do
+    let(:association_params) do
+      {
+        vendor_id: vendor.id,
+        participant_ids: [participant1.id, participant2.id]
+      }
+    end
     let(:params) do
-      FactoryGirl.attributes_for(:order).merge(vendor_id: vendor.id)
+      FactoryGirl.attributes_for(:order).merge(association_params)
     end
     it 'should change order count by 1' do
       expect do
