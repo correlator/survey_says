@@ -18,6 +18,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap-sass'
 
+gem 'twilio-ruby', '~> 4.11.1'
+
 group :development, :test do
   gem 'pry'
   gem 'rspec-rails'
