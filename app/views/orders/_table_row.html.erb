@@ -1,7 +1,7 @@
 <tr id="<%= "order-tablerow-#{order.id}" %>" data-updateurl="<%= order_path(order, format: :js) %>">
   <td><%= order.vendor.name %></td>
   <td><%= order.description %></td>
-  <td><%= number_to_currency(order.price.to_f * .01) %></td>
+  <td><%= number_to_currency(order.price_in_cents.to_f * 0.01) %></td>
   <td><%= order.close_date.strftime("%Y-%m-%d") %></td>
   <td><%= "#{order.order_participants.approved.count}/#{order.order_participants.count}" %></td>
 	<td>

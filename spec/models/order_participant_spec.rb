@@ -54,5 +54,24 @@ RSpec.describe OrderParticipant, type: :model do
         order_participant.approve!
       end
     end
+
+    describe 'scopes' do
+      let!(:order_participant) { FactoryGirl.create(:order_participant) }
+      let!(:sent_participant) do
+        FactoryGirl.create(:order_participant, status: :sent)
+      end
+      let!(:approved_participant) do
+        FactoryGirl.create(:order_participant, status: :approved)
+      end
+      it 'should keep track of sent messages' do
+        expect(OrderParticipant.sent.count).to eq 1
+        expect(OrderParticipant.sent.first).to eq sent_participant
+      end
+
+      it 'should keep track of approved messages' do
+        expect(OrderParticipant.approved.count).to eq 1
+        expect(OrderParticipant.approved.first).to eq approved_participant
+      end
+    end
   end
 end

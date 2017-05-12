@@ -5,6 +5,9 @@ class OrderParticipant < ApplicationRecord
   belongs_to :participant
   enum status: { pending: 0, sent: 1, approved: 2 }
 
+  scope :sent, -> { where(status: 'sent') }
+  scope :approved, -> { where(status: 'approved') }
+
   def send!
     return unless status == 'pending'
     update(status: :sent)
