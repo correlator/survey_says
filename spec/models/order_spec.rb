@@ -97,7 +97,7 @@ RSpec.describe Order, type: :model do
     let(:expected_message) do
       message = "#{order.vendor.name} would like to purchase your data for "
       message += "$#{order.price_in_cents.to_f * 0.01}. Give your consent at: "
-      message += "dataconsent.herokuapp.com/order_participants/#{order.order_participants.first.id}"
+      message += "http://dataconsent.herokuapp.com/order_participants/#{order.order_participants.first.id}"
       message
     end
     it 'should call twilio with a big message' do
