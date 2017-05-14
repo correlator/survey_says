@@ -1,4 +1,8 @@
+require 'twilio_client'
+
 class Order < ApplicationRecord
+  delegate :url_helpers, to: 'Rails.application.routes'
+
   validates :description, presence: true
   validates :vendor_id, presence: true
   validates :price_in_cents, presence: true
@@ -17,6 +21,7 @@ class Order < ApplicationRecord
   def activate!
     return unless status == 'pending'
     update(status: :active)
+    send_message_to_participants!
   end
 
   def complete!
@@ -28,5 +33,16 @@ class Order < ApplicationRecord
 
   def active_and_past_close_date?
     status == 'active' && Date.today >= close_date
+  end
+
+  def send_message_to_participants!
+    order_participants.each do |order_participant|
+			client = TwilioClient.new
+      client.send_text(order_participant.participant.phone, message(order_participant))
+    end
+  end
+
+  def message(order_participant)
+    "#{vendor.name} would like to purchase your data for $#{price_in_cents.to_f * 0.01}.  Give your consent here:"
   end
 end

@@ -68,6 +68,9 @@ RSpec.describe OrdersController, type: :request do
     let(:params) do
       FactoryGirl.attributes_for(:order).merge(association_params)
     end
+    before do
+      allow_any_instance_of(Order).to receive(:send_message_to_participants!)
+    end
     it 'should change order count by 1' do
       expect do
         post orders_path(format: :json), params: { order: params }, headers: { }

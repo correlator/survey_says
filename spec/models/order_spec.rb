@@ -30,6 +30,7 @@ RSpec.describe Order, type: :model do
 
     context 'when pending' do
       it 'should be activated by #activate!' do
+        expect(order).to receive(:send_message_to_participants!)
         order.activate!
         expect(order.status).to eq 'active'
       end
@@ -86,6 +87,21 @@ RSpec.describe Order, type: :model do
       expect(order.status).to eq 'active'
       order.update(close_date: 1.day.ago)
       expect(order.status).to eq 'complete'
+    end
+  end
+
+  describe '#send_message_to_participants!' do
+    before do
+      FactoryGirl.create(:order_participant, order: order)
+    end
+    let(:expected_message) do
+      "#{order.vendor.name} would like to purchase your data for $#{order.price_in_cents.to_f * 0.01}.  Give your consent here:"
+    end
+    it 'should call twilio with a big message' do
+      expect_any_instance_of(TwilioClient).to(
+        receive(:send_text)
+        .with(order.participants.first.phone, expected_message))
+      order.send(:send_message_to_participants!)
     end
   end
 end
