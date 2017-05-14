@@ -1,7 +1,40 @@
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-      <h2 class="text-center">You have approved this transaction</h2>
+		<div class="col-md-12">
+      <h2 class="text-center"><%= @order_participant.order.vendor.name %> Would Like to Purchase Your Data.</h2>
+
+      <div class="row">
+        <div class="col-md-6 text-right">
+          <b>Offer:</b>
+        </div>
+        <div class="col-md-6 text-left">
+          <%= number_to_currency @order_participant.order.price_in_cents %>
+        </div>
+        <div class="col-md-6 text-right">
+          <b>Reason:</b>
+        </div>
+        <div class="col-md-6 text-left">
+          <%= @order_participant.order.description %>
+        </div>
+        <div class="col-md-6 text-right">
+          <b>Pay Date:</b>
+        </div>
+        <div class="col-md-6 text-left">
+          <%= @order_participant.order.close_date.strftime("%b %d, %Y") %>
+        </div>
+      </div>
+      </br>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <% if @order_participant.status != 'approved' %>
+            <%= form_for @order_participant do |f| %>
+              <%= f.submit 'Approve', class: 'btn btn-wide btn-info' %>
+            <% end %>
+          <% else %>
+            <div class="btn btn-wide btn-success">Approved!</div>
+          <% end %>
+        </div>
+      </div>
 		</div>
   </div>
 </div>

@@ -46,7 +46,7 @@ class Order < ApplicationRecord
     raw_message = "#{vendor.name} would like to purchase your data "
     raw_message += "for $#{price_in_cents.to_f * 0.01}. "
     raw_message += "Give your consent at: "
-    raw_message += "http://dataconsent.herokuapp.com/order_participants/#{order_participant.id}"
+    raw_message += "dataconsent.herokuapp.com/order_participants/#{order_participant.id}"
     raw_message
   end
 end
