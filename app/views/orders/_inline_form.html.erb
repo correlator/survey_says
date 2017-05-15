@@ -9,7 +9,7 @@
   </div>
   <div class="col-md-4">
     <%= f.label :price_in_cents, 'Price', class: "control-label" %>
-    <%= f.number_field :price_in_cents, class: "form-control" %>
+    <%= f.number_field :price_in_cents, class: "form-control", value: number_with_precision(order.price_in_cents * 0.01, precision: 2), step: :any %>
   </div>
   <div class="col-md-4">
     <%= f.label :close_date, class: "control-label" %>

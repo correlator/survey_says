@@ -58,9 +58,13 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order)
-          .permit(:vendor_id, :description, :price_in_cents,
-                  :close_date, :status)
+    raw_params = params.require(:order)
+                       .permit(:vendor_id, :description, :price_in_cents,
+                               :close_date, :status)
+    if raw_params[:price_in_cents]
+      raw_params[:price_in_cents] = 100 * raw_params[:price_in_cents].to_f
+    end
+    raw_params
   end
 
   def load_order

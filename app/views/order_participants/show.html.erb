@@ -8,7 +8,7 @@
           <b>Offer:</b>
         </div>
         <div class="col-xs-6 text-left">
-          <%= number_to_currency @order_participant.order.price_in_cents %>
+          <%= number_to_currency @order_participant.order.price_in_cents * 0.01 %>
         </div>
         <div class="col-xs-6 text-right">
           <b>Reason:</b>
