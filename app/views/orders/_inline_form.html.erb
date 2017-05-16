@@ -1,27 +1,41 @@
 <%= form_for order, remote: true do |f| %>
-  <div class="col-md-4">
-    <%= f.label :vendor_id, 'Vendor', class: 'control-label' %>
-    <%= f.select(:vendor_id, options_for_select(Vendor.pluck(:name, :id), order.vendor_id) {}, { required: true }) %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.label :vendor_id, 'Vendor', class: 'control-label' %>
+      <%= f.select(:vendor_id, options_for_select(Vendor.pluck(:name, :id), order.vendor_id) {}, { required: true }) %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :description, class: "control-label" %>
+      <%= f.text_field :description, class: "form-control" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :price_in_cents, 'Price', class: "control-label" %>
+      <%= f.number_field :price_in_cents, class: "form-control", value: number_with_precision(order.price_in_cents * 0.01, precision: 2), step: :any %>
+    </div>
   </div>
-  <div class="col-md-4">
-    <%= f.label :description, class: "control-label" %>
-    <%= f.text_field :description, class: "form-control" %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.label :close_date, class: "control-label" %>
+      <%= f.date_field :close_date, class: "form-control" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :participant_ids, 'Participants', class: 'control-label' %>
+      <%= f.select(:participant_ids,  options_for_select(Participant.pluck(:name, :id), order.participants.pluck(:id)), {}, { required: true, multiple: true }) %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :anonymous, 'Is Anonymous?', class: 'control-label' %>
+      <%= f.select(:anonymous,  options_for_select([true, false], order.anonymous), {}, { required: true }) %>
+    </div>
   </div>
-  <div class="col-md-4">
-    <%= f.label :price_in_cents, 'Price', class: "control-label" %>
-    <%= f.number_field :price_in_cents, class: "form-control", value: number_with_precision(order.price_in_cents * 0.01, precision: 2), step: :any %>
-  </div>
-  <div class="col-md-4">
-    <%= f.label :close_date, class: "control-label" %>
-    <%= f.date_field :close_date, class: "form-control" %>
-  </div>
-  <div class="col-md-4">
-    <%= f.label :participant_ids, 'Participants', class: 'control-label' %>
-    <%= f.select(:participant_ids,  options_for_select(Participant.pluck(:name, :id), order.participants.pluck(:id)), {}, { required: true, multiple: true }) %>
-  </div>
-  <div class="col-md-4">
-    </br>
-    <%= f.submit 'Save', class: "btn btn-primary btn-wide btn-inline-form btn-sm" %>
+  <div class="row">
+    <div class="col-md-8">
+      <%= f.label :data_attributes, class: 'control-label' %>
+      <%= f.select(:data_attributes,  options_for_select(Order::DATA_ATTRIBUTE_OPTIONS, order.data_attributes.to_s.split(',')), {}, { required: true, multiple: true }) %>
+    </div>
+    <div class="col-md-4">
+      </br>
+      <%= f.submit 'Save', class: "btn btn-primary btn-wide btn-inline-form btn-sm" %>
+    </div>
   </div>
 <% end %>
 
@@ -29,5 +43,9 @@
   $( "#order_participant_ids" ).select2({
   });
   $( "#order_vendor_id" ).select2({
+  });
+  $( "#order_data_attributes" ).select2({
+  });
+  $( "#order_anonymous" ).select2({
   });
 </script>

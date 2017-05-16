@@ -60,10 +60,11 @@ class OrdersController < ApplicationController
   def order_params
     raw_params = params.require(:order)
                        .permit(:vendor_id, :description, :price_in_cents,
-                               :close_date, :status)
-    if raw_params[:price_in_cents]
-      raw_params[:price_in_cents] = 100 * raw_params[:price_in_cents].to_f
-    end
+                               :close_date, :status, :anonymous, data_attributes: [])
+    raw_params[:price_in_cents] = 100 * raw_params[:price_in_cents].to_f
+    raw_params[:data_attributes] ||= []
+    raw_params[:data_attributes].delete_if { |attribute| attribute.blank? }
+    raw_params[:data_attributes] = raw_params[:data_attributes].join(',')
     raw_params
   end
 

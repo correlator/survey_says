@@ -17,6 +17,22 @@
           <%= @order_participant.order.description %>
         </div>
         <div class="col-xs-6 text-right">
+          <b>Data is Anonymous?</b>
+        </div>
+        <div class="col-xs-6 text-left">
+          <%= @order_participant.order.anonymous %>
+        </div>
+        <div class="col-xs-6 text-right">
+          <b>Data Attributes For Sale?:</b>
+        </div>
+        <div class="col-xs-6 text-left">
+          <ul>
+            <% @order_participant.order.data_attributes.to_s.split(',').each do |attribute| %>
+              <li><%= attribute %></li>
+            <% end%>
+          </ul>
+        </div>
+        <div class="col-xs-6 text-right">
           <b>Pay Date:</b>
         </div>
         <div class="col-xs-6 text-left">

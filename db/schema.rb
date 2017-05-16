@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511010220) do
+ActiveRecord::Schema.define(version: 20170516023734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,11 +27,13 @@ ActiveRecord::Schema.define(version: 20170511010220) do
   create_table "orders", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "vendor_id"
     t.text     "description"
-    t.integer  "price_in_cents", default: 0
+    t.integer  "price_in_cents",  default: 0
     t.date     "close_date"
-    t.integer  "status",         default: 0
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "status",          default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "data_attributes"
+    t.boolean  "anonymous"
     t.index ["vendor_id"], name: "index_orders_on_vendor_id", using: :btree
   end
 

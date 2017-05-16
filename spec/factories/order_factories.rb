@@ -5,5 +5,7 @@ FactoryGirl.define do
     price_in_cents { 100}
     close_date { 10.days.from_now }
     status { :pending }
+    data_attributes { ['Money', 'Fame'] }
+    anonymous { true }
   end
 end

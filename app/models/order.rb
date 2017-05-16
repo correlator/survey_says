@@ -12,6 +12,11 @@ class Order < ApplicationRecord
   has_many :participants, through: :order_participants
   enum status: { pending: 0, active: 1, complete: 2 }
 
+  DATA_ATTRIBUTE_OPTIONS = ['Address', 'Income', 'Insurance Coverage',
+                            'Insurance Usage', 'Retirement Plan', 'Job Title',
+                            'CoPay Usage', 'Car Driven', 'Genome Sequence',
+                            'Flu Shot History', 'Social Media Profiles',
+                            'Lab Test Results']
   after_save :update_status
 
   def update_status
