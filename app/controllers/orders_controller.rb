@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :load_order, only: [:show, :edit, :update]
   def index
-    @orders = Order.all
+    @orders = Order.order(created_at: :desc)
     respond_to do |format|
       format.html
       format.json { render json: @orders }
