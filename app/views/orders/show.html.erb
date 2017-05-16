@@ -1,7 +1,18 @@
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-      <h2 class="text-center"><%= @order.name %></h2>
+		<div class="col-md-12">
+      <h2 class="text-center"><%= @order.vendor.name %></h2>
+      <h3 class="text-center"><%= @order.vendor.name %></h3>
 		</div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <ul>
+        <% @order.order_participants.each do |order_participant| %>
+          <li>
+            <%= link_to order_participant.participant.name, order_participant_url(order_participant) %>
+          </li>
+        <% end %>
+      </ul>
   </div>
 </div>
